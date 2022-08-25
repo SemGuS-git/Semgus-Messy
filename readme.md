@@ -16,7 +16,7 @@ scala, java (>= 1.8), z3, Semgus-Parser
 
 To run Messy, download the fat JAR from the releases page, and run:
 ```
-`scala Messy.jar -i <PATH-TO-INPUT-SEMGUS-FILE>
+scala Messy.jar -i <PATH-TO-INPUT-SEMGUS-FILE>
 ```
 This will produce an SMT file `out.z3`, upon which an external CHC solver (such as Z3) can be run.
 
