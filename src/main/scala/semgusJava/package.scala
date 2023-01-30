@@ -61,6 +61,17 @@ package object semgusJava {
   }
 
   def translateCHC(h: HornClauseEvent): SemanticCHC = {
+    utils.printGreen(h.toString)
+
+    val constructor = h.constructor.name
+    val constructArgs = h.constructor.arguments.asScala
+    val constructorString = if (constructArgs.isEmpty) constructor else {
+      val argString = constructArgs.map{typedVarWithTypeStr}.mkString(" ")
+      s"($constructor $argString)"
+    }
+    val constructorHead = h.head.arguments.asScala.head.name
+    val syntaxConstraint = s"(= $constructorHead $constructorString)"
+
     val decl = RelDeclaration(h.head.name, h.head.arguments.asScala.map{tv => tv.`type`.toString}.toList)
     val headVars = h.head.arguments.asScala.map{
       tv => Variable(tv.name, tv.`type`.toString)}.toSet
@@ -71,7 +82,7 @@ package object semgusJava {
         case (varAcc, v) => varAcc + Variable(v.name, v.`type`.toString)}.union(relAcc)}
 
     val constraint = constraint2Str(h.constraint)
-    val premise = s"(and $premiseRels $constraint)"
+    val premise = s"(and $syntaxConstraint $premiseRels $constraint)"
     SemanticCHC(decl, headVars.union(relVars), SMTFormula(premise), SMTFormula(headRels))
   }
 

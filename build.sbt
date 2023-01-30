@@ -8,7 +8,7 @@ resolvers += "jitpack" at "https://jitpack.io"
 
 libraryDependencies ++= Seq(
   "org.rogach" %% "scallop" % "4.0.4",
-  "com.github.SemGuS-git" % "Semgus-Java" % "1.0.1"
+  "com.github.SemGuS-git" % "Semgus-Java" % "1.0.2"
 )
 
 libraryDependencies ++= Seq(

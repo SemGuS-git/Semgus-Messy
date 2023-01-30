@@ -35,6 +35,8 @@ run `sbt assembly` to produce the fat JAR on the releases page, or `sbt run` to 
 
 ### Caveats
 
+- Messy will currently treat the first variable supplied to a relation as the variable that represents the term, and thus can only solve Semgus problems that have been written to respect this fact. This is not required in general of Semgus files, and the restriction is expected to be lifted in the future; the current restriction is due to a discrepancy with the Semgus parser.
+
 - Messy is currently unable to produce synthesized programs for realizable synthesis problems (even if it can prove that the generated CHC file is `sat`). This is because support for recursive datatypes and non-linear CHCs in `z3` is still highly experimental and will often crash when asked for proof witnesses, from which an actual program can be extracted.
 - Messy currently does not support the list / array encoding described in the [paper](https://dl.acm.org/doi/abs/10.1145/3434311), and encodes syntactic representations of terms using algebraic datatypes. This functionality is expected to be added in the future.
 
